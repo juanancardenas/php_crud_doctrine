@@ -1,0 +1,48 @@
+{
+    "name": "miw_upm/miw_results",
+    "license": "MIT",
+    "type": "project",
+    "description": "MiW ORM Doctrine - Results",
+    "homepage": "https://miw.etsisi.upm.es/",
+    "keywords": ["doctrine-orm", "dotenv", "routing"],
+    "authors": [
+        {
+            "name": "MiW UPM",
+            "homepage": "https://miw.etsisi.upm.es/",
+            "email": "miw.etsisi@upm.es",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MiW\\Results\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MiW\\Results\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+		"php": ">=8.2",
+        "ext-mysqli": "*",
+        "ext-json": "*",
+        "doctrine/orm": "^3.5",
+        "vlucas/phpdotenv": "^5.6",
+        "symfony/config": "^7.3",
+        "symfony/cache": "^7.3",
+        "symfony/routing": "^7.3",
+        "symfony/yaml": "^7.3",
+        "symfony/var-exporter": "7.4.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.4",
+        "roave/security-advisories": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
+    }
+}
