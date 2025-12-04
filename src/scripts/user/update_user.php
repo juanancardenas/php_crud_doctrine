@@ -1,7 +1,7 @@
 <?php
 /**
  * Realiza la actualización de un usuario que se le pasa por parámetro
- * src/scripts/update_user.php
+ * src/scripts/user/update_user.php
  *
  * @category Scripts
  * @license  https://opensource.org/licenses/MIT MIT License
@@ -83,7 +83,10 @@ try {
 
         switch ($type) {
             case 'int':
-                $$name = (int)$value;
+                if (!ctype_digit($value)) {
+                    throw new InvalidArgumentException("Parameter '{$name}' must be an integer.");
+                }
+                $$name = (int) $value;
                 break;
 
             case 'string':

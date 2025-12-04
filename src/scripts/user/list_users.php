@@ -1,7 +1,7 @@
 <?php
 /**
  * Realiza la lectura de todos los usuarios de la base de datos
- * src/scripts/list_users.php
+ * src/scripts/user/list_users.php
  *
  * @category Scripts
  * @license  https://opensource.org/licenses/MIT MIT License
@@ -51,7 +51,7 @@ $users = $userRepository->findAll();
 if (in_array('--json', $argv, true)) {
     if (!$users) {
         echo json_encode(
-            ['error' => "There are no users registered in the database"],
+            ['info' => "There are no users registered in the database"],
             JSON_PRETTY_PRINT
         );
     } else {
@@ -79,6 +79,7 @@ if (in_array('--json', $argv, true)) {
                 ($user->isAdmin()) ? 'true' : 'false')
             . PHP_EOL;
     }
+
     // Se indica el número total de usuarios
     $total = count($users);
     echo PHP_EOL . "Total: $total users." . PHP_EOL . PHP_EOL;

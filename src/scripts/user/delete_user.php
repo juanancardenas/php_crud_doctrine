@@ -1,7 +1,7 @@
 <?php
 /**
  * Realiza el borrado de un usuario que se le pasa por parámetro
- * src/scripts/delete_user.php
+ * src/scripts/user/delete_user.php
  *
  * @category Scripts
  * @license  https://opensource.org/licenses/MIT MIT License

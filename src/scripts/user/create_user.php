@@ -1,7 +1,7 @@
 <?php
 /**
  * Realiza la creación de un nuevo usuario
- * src/create_user_admin.php
+ * src/scripts/user/create_user.php
  *
  * @category Scripts
  * @license  https://opensource.org/licenses/MIT MIT License
@@ -35,8 +35,8 @@ OPTIONS:
   --help        Display this message and exit
 
 EXAMPLES:
-  php .\src\scripts\user\create_user_admin.php alice alice@example.com secret true false
-  php .\src\scripts\user\create_user_admin.php bob bob@test.com hello 1 0 --json
+  php .\src\scripts\user\create_user.php alice alice@example.com secret true false
+  php .\src\scripts\user\create_user.php bob bob@test.com hello 1 0 --json
 
 HELP;
     exit(0);

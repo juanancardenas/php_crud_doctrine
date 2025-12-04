@@ -1,7 +1,7 @@
 <?php
 /**
  * Realiza la lectura de un usuario que se le pasa por parámetro
- * src/scripts/list_user.php
+ * src/scripts/user/list_user.php
  *
  * @category Scripts
  * @license  https://opensource.org/licenses/MIT MIT License

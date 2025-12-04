@@ -94,7 +94,7 @@ class Result implements JsonSerializable, Stringable
             '%3d - %6d - %22s - %s',
             $this->id,
             $this->result,
-            $this->user->getUsername(),
+            $this->user->getUsername() ?? $this->user->getEmail() ?? $this->user->isEnabled() ?? $this->user->isAdmin(),
             $this->time->format('Y-m-d H:i:s')
         );
     }
