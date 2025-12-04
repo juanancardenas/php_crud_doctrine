@@ -17,6 +17,7 @@ use Stringable;
 /**
  * User
  *
+ * @property $getId
  * @SuppressWarnings(PHPMD.ShortVariable)
  */
 #[ORM\Entity, ORM\Table(name: 'users')]
@@ -160,7 +161,7 @@ class User implements JsonSerializable, Stringable
      * @param bool $enabled
      * @return void
      */
-    public function setEnabled(bool $enabled): void
+    public function setIsEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
