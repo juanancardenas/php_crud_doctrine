@@ -1,7 +1,7 @@
 <?php
 /**
- * Realiza la creación de un nuevo resultado
- * src/scripts/results/create_result.php
+ * Realiza la actualización de un usuario que se le pasa por parámetro
+ * src/scripts/user/update_user.php
  *
  * @category Scripts
  * @license  https://opensource.org/licenses/MIT MIT License
@@ -19,12 +19,14 @@ use MiW\Results\Utility\Utils;
 if (in_array('--help', $argv, true)) {
     echo <<<HELP
 USE:
-  php .\src\scripts\results\create_result.php result time userid [--json]
+  php .\src\scripts\results\update_result.php [ID] [--json]
 
 DESCRIPTION:
-  Create a new result in the database using Doctrine
+  Updates the data of a result whose ID is passed as a parameter.
+  Use Doctrine to query the database and update the data of this result.
 
 PARAMETERS:
+  id            Numeric identifier of the result to be updated. Mandatory. If not provided, the script will display an error.
   result        Result value (int)
   time          Time of the result
   userId        Userid who scores the result (int)
@@ -34,8 +36,8 @@ OPTIONS:
   --help        Display this message and exit
 
 EXAMPLES:
-  php .\src\scripts\results\create_result.php 370 "2025-12-04 15:30:00" 11
-  php .\src\scripts\results\create_result.php 224 "2025-12-04 15:30:00" 10 --json
+  php .\src\scripts\results\update_result.php 5 224 "2025-12-01 19:00:00" 2
+  php .\src\scripts\results\update_result.php 6 373 "2025-12-01 09:14:42" 3 --json
 
 HELP;
     exit(0);
@@ -46,7 +48,7 @@ Utils::loadEnv(dirname(__DIR__, 3));
 $entityManager = DoctrineConnector::getEntityManager();
 
 // Definición de variables
-$result = 0; $userId = 0; // Valores del resultado a insertar
+$id = 0; $result = 0; $userId = 0; // Valores del usuario a actualizar
 /** @var DateTime|null $time */
 $time = null;
 $formatoJson = false;
@@ -56,8 +58,8 @@ if (in_array('--json',$argv,true)) {
     $formatoJson = true;
 }
 
-// Control de argumentos (4 para json / 3 para texto)
-$argsValidos = ($argc === ($formatoJson ? 5 : 4));
+// Control de argumentos (6 para json / 5 para texto)
+$argsValidos = ($argc === ($formatoJson ? 6 : 5));
 if (!$argsValidos) {
     echo "Enter the parameters correctly, use --help for support" . PHP_EOL;
     exit(0);
@@ -65,9 +67,10 @@ if (!$argsValidos) {
 
 // Leer y validar los parámetros de entrada
 $paramSchema = [
-    1 => ['name' => 'result', 'type' => 'int'],
-    2 => ['name' => 'time',   'type' => 'datetime'],
-    3 => ['name' => 'userId', 'type' => 'int']
+    1 => ['name' => 'id', 'type' => 'int'],
+    2 => ['name' => 'result', 'type' => 'int'],
+    3 => ['name' => 'time',   'type' => 'datetime'],
+    4 => ['name' => 'userId', 'type' => 'int']
 ];
 
 try {
@@ -111,17 +114,32 @@ if (!$user) {
     exit(1);
 }
 
-// Persistir el nuevo resultado
-$objResult = new Result($result, $user, $time);
-try {
-    $entityManager->persist($objResult);
-    $entityManager->flush();
+// Obtener resultado a ser modificado
+$resultRepository = $entityManager->getRepository(Result::class);
+$objResult = $resultRepository->find($id);
+if (!$objResult) {
     if ($formatoJson) {
         echo json_encode(
-            ["OK" => "Created Result with ID #{$objResult->getId()}"], JSON_PRETTY_PRINT );
+            ["error" => "Result with ID #{$id} not found"], JSON_PRETTY_PRINT );
     } else {
-        echo 'Created Result with ID #' . $objResult->getId() . PHP_EOL;
+        echo "Result with ID #$id not found" . PHP_EOL;
     }
-} catch (Throwable $exception) {
-    echo $exception->getMessage() . PHP_EOL;
+} else {
+    try {
+        $objResult->setResult($result);
+        $objResult->setTime($time);
+        $objResult->setUserId($user);
+
+        // Persistir el resultado con los cambios aplicados
+        $entityManager->persist($objResult);
+        $entityManager->flush();
+        if ($formatoJson) {
+            echo json_encode(
+                ["OK" => "Updated Result with ID #{$objResult->getId()}"], JSON_PRETTY_PRINT);
+        } else {
+            echo 'Updated Result with ID #' . $objResult->getId() . PHP_EOL;
+        }
+    } catch (Throwable $exception) {
+        echo $exception->getMessage() . PHP_EOL;
+    }
 }

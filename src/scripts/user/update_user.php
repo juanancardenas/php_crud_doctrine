@@ -116,7 +116,7 @@ try {
     exit(1);
 }
 
-// Obtener usuario
+// Obtener usuario a ser modificado
 $userRepository = $entityManager->getRepository(User::class);
 $user = $userRepository->find($id);
 
@@ -134,6 +134,8 @@ if (!$user) {
         $user->setPassword($password);
         $user->setIsEnabled($isEnabled);
         $user->setIsAdmin($isAdmin);
+
+        // Persistir usuario con los cambios aplicados
         $entityManager->persist($user);
         $entityManager->flush();
         if ($formatoJson) {
