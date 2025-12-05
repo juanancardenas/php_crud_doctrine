@@ -5,17 +5,41 @@ ruta_raíz:
     controller: 'funcionHomePage'
     methods:   [ GET ]
 
-ruta_user_list:
-    path:     /users
-    controller: 'funcionListadoUsuarios'
-    methods:
-      - GET
+#ruta_user_list:
+#    path:     /users
+#    controller: 'funcionListadoUsuarios'
+#    methods:
+#      - GET
 
-ruta_user:
-    path:     /users/{name}
-    controller: 'funcionUsuario'
-    defaults:
-        name: _default_
-    methods:
-        - GET
-        - DELETE
+#ruta_user:
+#    path:     /users/{name}
+#    controller: 'funcionUsuario'
+#    defaults:
+#        name: _default_
+#    methods:
+#        - GET
+#        - DELETE
+
+user_list:
+  path: /users
+  methods: [GET]
+  defaults:
+    _controller: 'userList'
+
+user:
+  path: /users/{id}
+  methods: [GET]
+  defaults:
+    _controller: 'user'
+
+result_list:
+  path: /results
+  methods: [GET]
+  defaults:
+    _controller: 'resultList'
+
+result:
+  path: /results/{id}
+  methods: [GET]
+  defaults:
+    _controller: 'result'

@@ -1,7 +1,4 @@
 <?php
-
-error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
-
 /**
  * public/index.php
  *
@@ -41,7 +38,7 @@ $path_info = $_SERVER['REQUEST_URI'] ?? '/';
 try {
     $parameters = $matcher->match($path_info);
     $action = $parameters['_controller'];
-    $param1 = $parameters['name'] ?? null;
+    $param1 = $parameters['id'] ?? null;
     $action($param1);   # ejecutar la acción $action()?
 
     // echo '<pre>', var_dump($parameters), '</pre>';
@@ -52,6 +49,6 @@ try {
 }
 
 // El componente también sirve para mostrar la información de una ruta a través de su nombre
-// echo '<br>---' . PHP_EOL . '<pre>Inverso "ruta_admin": ';
-// var_dump($routes->get('ruta_admin')->getPath());
-// echo '</pre>';
+//echo '<br>---' . PHP_EOL . '<pre>Inverso "ruta_admin": ';
+//var_dump($routes->get('ruta_admin')->getPath());
+//echo '</pre>';

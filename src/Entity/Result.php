@@ -83,6 +83,14 @@ class Result implements JsonSerializable, Stringable
     }
 
     /**
+     * @return int
+     */
+    public function getResult(): int
+    {
+        return $this->result;
+    }
+
+    /**
      * Set result
      *
      * @param int $result result
@@ -94,6 +102,14 @@ class Result implements JsonSerializable, Stringable
     }
 
     /**
+     * @return DateTime
+     */
+    public function getTime(): DateTime
+    {
+        return $this->time;
+    }
+
+    /**
      * Set time
      *
      * @param DateTime $time time
@@ -102,6 +118,14 @@ class Result implements JsonSerializable, Stringable
     public function setTime(DateTime $time): void
     {
         $this->time = $time;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
     }
 
     /**
