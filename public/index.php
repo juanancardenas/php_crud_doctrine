@@ -41,7 +41,7 @@ try {
     $param1 = $parameters['id'] ?? null;
     $action($param1);   # ejecutar la acción $action()?
 
-    // echo '<pre>', var_dump($parameters), '</pre>';
+//    echo '<pre>', var_dump($parameters), '</pre>';
 } catch (ResourceNotFoundException $e) {
     echo 'Caught exception: The resource could not be found' . PHP_EOL;
 } catch (MethodNotAllowedException $e) {
@@ -49,6 +49,6 @@ try {
 }
 
 // El componente también sirve para mostrar la información de una ruta a través de su nombre
-//echo '<br>---' . PHP_EOL . '<pre>Inverso "ruta_admin": ';
-//var_dump($routes->get('ruta_admin')->getPath());
+//echo '<br>---' . PHP_EOL . '<pre>Inverso "' . $parameters['_route'] . '": ';
+//var_dump($routes->get($parameters['_route'])->getPath());
 //echo '</pre>';

@@ -1,45 +1,117 @@
 # rutas.yml
 ---
-ruta_raíz:
+homepage:
     path:     /
     controller: 'funcionHomePage'
     methods:   [ GET ]
 
-#ruta_user_list:
-#    path:     /users
-#    controller: 'funcionListadoUsuarios'
-#    methods:
-#      - GET
+##########################################################
+# USER paths                                             #
+##########################################################
 
-#ruta_user:
-#    path:     /users/{name}
-#    controller: 'funcionUsuario'
-#    defaults:
-#        name: _default_
-#    methods:
-#        - GET
-#        - DELETE
+# GET create for navigation
+user_create_form:
+  path: /users/create
+  methods: [GET]
+  defaults:
+    _controller: 'userCreate'
 
+# POST create for persistence
+user_create:
+  path: /users/create
+  methods: [POST]
+  defaults:
+    _controller: 'userCreate'
+
+# GET all users
 user_list:
   path: /users
   methods: [GET]
   defaults:
     _controller: 'userList'
 
+# GET one user {id}
 user:
   path: /users/{id}
   methods: [GET]
   defaults:
     _controller: 'user'
+  requirements:
+    id: '\d+'
 
+# GET Update for navigation
+user_update_form:
+  path: /users/{id}/edit
+  methods: [GET]
+  defaults:
+    _controller: 'userUpdate'
+
+# POST Update` for persistence
+user_update:
+  path: /users/{id}/edit
+  methods: [POST]
+  defaults:
+    _controller: 'userUpdate'
+
+# DELETE one user {id}
+user_delete:
+  path: /users/{id}/delete
+  methods: [GET]
+  defaults:
+    _controller: 'userDelete'
+
+
+##########################################################
+# RESULT paths                                           #
+##########################################################
+
+# GET create for navigation
+result_create_form:
+  path: /results/create
+  methods: [GET]
+  defaults:
+    _controller: 'resultCreate'
+
+# POST create for persistence
+result_create:
+  path: /results/create
+  methods: [POST]
+  defaults:
+    _controller: 'resultCreate'
+
+# GET all results
 result_list:
   path: /results
   methods: [GET]
   defaults:
     _controller: 'resultList'
 
+# GET one result {id}
 result:
   path: /results/{id}
   methods: [GET]
   defaults:
     _controller: 'result'
+  requirements:
+    id: '\d+'
+
+# GET Update for navigation
+result_update_form:
+  path: /results/{id}/edit
+  methods: [GET]
+  defaults:
+    _controller: 'resultUpdate'
+
+# POST Update for persistence
+result_update:
+  path: /results/{id}/edit
+  methods: [POST]
+  defaults:
+    _controller: 'resultUpdate'
+
+# DELETE one result {id}
+result_delete:
+  path: /results/{id}/delete
+  methods: [GET]
+  defaults:
+    _controller: 'resultDelete'
