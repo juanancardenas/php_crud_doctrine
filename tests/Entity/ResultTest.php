@@ -57,9 +57,10 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructor(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertSame(self::POINTS, $this->result->getResult());
+        $this->assertSame($this->user, $this->result->getUser());
+        $this->assertSame($this->time, $this->result->getTime());
+        $this->assertSame(0, $this->result->getId());
     }
 
     /**
@@ -69,9 +70,8 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetId():void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        // Valor autoincremental en BD; no podemos hacerle set por testing, así que que será 0
+        $this->assertSame(0, $this->result->getId());
     }
 
     /**
@@ -81,9 +81,9 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testResult(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertSame(self::POINTS, $this->result->getResult());
+        $this->result->setResult(3204);
+        $this->assertSame(3204, $this->result->getResult());
     }
 
     /**
@@ -93,9 +93,12 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testUser(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertSame($this->user, $this->result->getUser());
+
+        $newUser = new User('juan', 'juan@miw.es', 'secret-password', true, false);
+        $this->result->setUserId($newUser);
+
+        $this->assertSame($newUser, $this->result->getUser());
     }
 
     /**
@@ -105,9 +108,12 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testTime(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertSame($this->time, $this->result->getTime());
+
+        $newTime = new \DateTime('-1 day');
+        $this->result->setTime($newTime);
+
+        $this->assertSame($newTime, $this->result->getTime());
     }
 
     /**
@@ -117,9 +123,11 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testToString(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $text = (string) $this->result;
+
+        $this->assertStringContainsString((string) self::POINTS, $text);
+        $this->assertStringContainsString(self::USERNAME, $text);
+        $this->assertStringContainsString($this->time->format('Y-m-d'), $text);
     }
 
     /**
@@ -129,8 +137,15 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testJsonSerialize(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
+        $json = $this->result->jsonSerialize();
+
+        $this->assertIsArray($json);
+        $this->assertSame(0, $json['id']);
+        $this->assertSame(self::POINTS, $json['result']);
+        $this->assertSame($this->user, $json['user']);
+        $this->assertSame(
+            $this->time->format('Y-m-d H:i:s'),
+            $json['time']
         );
     }
 }

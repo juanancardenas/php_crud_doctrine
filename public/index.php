@@ -7,9 +7,9 @@
  */
 
 require dirname(__DIR__) . '/vendor/autoload.php';
-require_once dirname(__DIR__) . '/src/Controller/controllers.php';
-require_once dirname(__DIR__) . '/src/Controller/ControllerResult.php';
-require_once dirname(__DIR__) . '/src/Controller/ControllerUser.php';
+require_once dirname(__DIR__) . '/src/Controller/controllers.php';      // Controlador de Homepage y Global (Ctes)
+require_once dirname(__DIR__) . '/src/Controller/ControllerUser.php';   // Controlador de User
+require_once dirname(__DIR__) . '/src/Controller/ControllerResult.php'; // Controlador de Resultados
 
 use MiW\Results\Utility\Utils;
 use Symfony\Component\Config\FileLocator;
