@@ -8,6 +8,8 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 require_once dirname(__DIR__) . '/src/Controller/controllers.php';
+require_once dirname(__DIR__) . '/src/Controller/ControllerResult.php';
+require_once dirname(__DIR__) . '/src/Controller/ControllerUser.php';
 
 use MiW\Results\Utility\Utils;
 use Symfony\Component\Config\FileLocator;
